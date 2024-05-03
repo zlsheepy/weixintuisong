@@ -9,9 +9,17 @@ import os
  
 def get_color():
     # 获取随机颜色
-    get_colors = lambda n: list(map(lambda i: "#" + "%06x" % random.randint(0, 0xFFFFFF), range(n)))
-    color_list = get_colors(100)
-    return random.choice(color_list)
+    # get_colors = lambda n: list(map(lambda i: "#" + "%06x" % random.randint(0, 0xFFFFFF), range(n)))
+    # color_list = get_colors(100)
+    # return random.choice(color_list)
+    r = random.randint(16, 255)
+    g = random.randint(16, 255)
+    b = random.randint(16, 255)
+    r = hex(r)
+    g = hex(g)
+    b = hex(b)
+    ans = "#" + r[2:] + g[2:] + b[2:]
+    return ans
  
  
 def get_access_token():
@@ -183,7 +191,7 @@ def send_message(to_user, access_token, region_name, weather, temp, wind_dir, no
         else:
             birthday_data = "距离{}的生日还有{}天~".format(value["name"], birth_day)
         # 将生日数据插入data
-        data["data"][key] = {"value": birthday_data, "color" : "blue"}
+        data["data"][key] = {"value": birthday_data, "color" : get_color()}
     headers = {
         'Content-Type': 'application/json',
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) '
